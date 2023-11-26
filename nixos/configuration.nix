@@ -7,44 +7,21 @@
       ../hosts/desktop
     ];
 
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-
-  boot.loader.grub.theme = pkgs.stdenv.mkDerivation {
-    pname = "distro-grub-themes";
-    version = "3.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "AdisonCavani";
-      repo = "distro-grub-themes";
-      rev = "v3.1";
-      hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
-    };
-    installPhase = "cp -r customize/nixos $out";
-  };
-
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Sao_Paulo";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "pt_BR.UTF-8";
-    LC_IDENTIFICATION = "pt_BR.UTF-8";
-    LC_MEASUREMENT = "pt_BR.UTF-8";
-    LC_MONETARY = "pt_BR.UTF-8";
-    LC_NAME = "pt_BR.UTF-8";
-    LC_NUMERIC = "pt_BR.UTF-8";
-    LC_PAPER = "pt_BR.UTF-8";
-    LC_TELEPHONE = "pt_BR.UTF-8";
-    LC_TIME = "pt_BR.UTF-8";
-  };
+i18n.extraLocaleSettings = {
+  LC_ADDRESS = "fr_FR.UTF-8";
+  LC_IDENTIFICATION = "fr_FR.UTF-8";
+  LC_MEASUREMENT = "fr_FR.UTF-8";
+  LC_MONETARY = "fr_FR.UTF-8";
+  LC_NAME = "fr_FR.UTF-8";
+  LC_NUMERIC = "fr_FR.UTF-8";
+  LC_PAPER = "fr_FR.UTF-8";
+  LC_TELEPHONE = "fr_FR.UTF-8";
+  LC_TIME = "fr_FR.UTF-8";
+};
+
 
    services.xserver = {
    enable = true;
@@ -74,13 +51,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  programs.steam = {
-   enable = true;
-   remotePlay.openFirewall = true;
-   dedicatedServer.openFirewall = true;
-  };
   # Configure console keymap
-  console.keyMap = "br-abnt2";
+  console.keyMap = "fr-latin9";
+
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -102,10 +75,10 @@
    NIXPKGS_ALLOW_UNFREE = "1";
   };
   
-  users.users.enzo = {
+  users.users.FantasyCriT = {
     isNormalUser = true;
-    description = "Enzo";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    description = "FantasyCriT";
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
       (opera.override { proprietaryCodecs = true; })
